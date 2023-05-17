@@ -11,12 +11,19 @@ public class PilotaThread extends Thread {
     @Override
     public void run() {
         try {
+            String nomePilota = Thread.currentThread().getName();
             pista.entrataSpogliatoio(nome);
             pista.entrataPista(nome);
 
-            long tempoGara = (int) (Math.random() * 4000 + 2000);
-            Thread.sleep(tempoGara);
-            System.out.println(nome + " ha completato la gara con un tempo di " + tempoGara + " secondi");
+            long tempo = System.currentTimeMillis();
+
+            for (int i = 0; i < 15; i++) {
+                Thread.sleep((int) (Math.random() * 4000 + 2000));
+                System.out.println("Il pilota " + nomePilota + " ha percorso il giro n " + (i + 1));
+            }
+
+            tempo = System.currentTimeMillis() - tempo;
+            System.out.println(nome + " ha completato la gara con un tempo di " + tempo + " secondi");
 
             pista.uscitaPista(nome);
             pista.ritornoSpogliatoio(nome);
